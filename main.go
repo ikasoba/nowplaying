@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 
@@ -61,9 +62,30 @@ func main() {
 	e.GET("/embed_code", func(c echo.Context) error {
 		user := c.QueryParam("user")
 
+		req := c.Request()
+
+		var host string
+		if req.Header.Get("X-Forwarded-Proto") == "https" {
+			host = "https://"
+		} else {
+			host = "http://"
+		}
+
+		host += req.Host
+
+		link, err := url.JoinPath(host, "/playing/", user, "/url")
+		if err != nil {
+			return err
+		}
+
+		imageUrl, err := url.JoinPath(host, "/playing/", user)
+		if err != nil {
+			return err
+		}
+
 		return c.Render(http.StatusOK, "embed.html",
-			`<a href="https://nowplaying.ikasoba.net/playing/`+user+`/url">
-  <img src="https://nowplaying.ikasoba.net/playing/`+user+`" />
+			`<a href="`+link+`">
+  <img src="`+imageUrl+`" />
 </a>`)
 	})
 
@@ -108,7 +130,7 @@ func main() {
 		})
 	})
 
-	addr := os.Getenv("HOST_ADDR")
+	addr := os.Getenv("PORT")
 	if addr == "" {
 		addr = ":8080"
 	}

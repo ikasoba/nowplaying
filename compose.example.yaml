@@ -6,4 +6,4 @@ services:
     environment:
       LASTFM_KEY: ${LASTFM_KEY}
       LASTFM_SECRET: ${LASTFM_SECRET}
-      HOST_ADDR: :8080
+      PORT: :8080
