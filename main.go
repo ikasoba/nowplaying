@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"strconv"
+	"unicode/utf8"
 
 	"text/template"
 
@@ -24,10 +25,11 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 type Playing struct {
-	Url    string
-	Icon   string
-	Title  string
-	Status string
+	Url     string
+	Icon    string
+	Title   string
+	Status  string
+	Animate bool
 }
 
 type EmbedCode struct {
@@ -119,7 +121,7 @@ func main() {
 
 		track := res.Tracks[0]
 
-		icon, err := ToDataUrl(track.Images[len(track.Images)-1].Url)
+		icon, err := ToDataUrl(track.Images[0].Url)
 		if err != nil {
 			return err
 		}
@@ -127,11 +129,17 @@ func main() {
 		header := c.Response().Header()
 		header.Set("Cache-Control", "max-age="+strconv.Itoa(60*3))
 
+		animate := false
+		if utf8.RuneCountInString(track.Name) > 10 {
+			animate = true
+		}
+
 		return c.Render(http.StatusOK, "playing.svg", Playing{
-			Url:    track.Url,
-			Icon:   icon,
-			Title:  track.Name,
-			Status: track.Artist.Name,
+			Url:     track.Url,
+			Icon:    icon,
+			Title:   track.Name,
+			Status:  track.Artist.Name,
+			Animate: animate,
 		})
 	})
 

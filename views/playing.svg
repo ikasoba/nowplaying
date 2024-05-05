@@ -1,29 +1,40 @@
 <svg width="29.632mm" height="7.4083mm" version="1.1" viewBox="0 0 29.632 7.4083"
   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <clipPath id="clipPath7772">
-      <path
-        d="m44.979 44.979h-39.357c-3.1148 0-5.6224-2.5076-5.6224-5.6224v-33.734c0-3.1148 2.5076-5.6224 5.6224-5.6224h39.357"
-        style="fill:#fafbfa;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.0542" />
-    </clipPath>
-    <clipPath id="clipPath8031">
-      <rect x="39.175" y="7.0755" width="101.6" height="25.4" ry="0"
-        style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:.79375" />
+    <clipPath id="clipPath23699">
+      <rect x="7.4082" y="8.7588e-5" width="22.225" height="5.5562" ry=".79366"
+        style="fill:#ffebeb;stroke-linecap:round;stroke-linejoin:round;stroke-width:.79375" />
     </clipPath>
   </defs>
   <path
     d="m7.4081 0h-6.5365c-0.48284 0-0.87155 0.38871-0.87155 0.87155v5.6651c0 0.48284 0.38871 0.87155 0.87155 0.87155h6.5365z"
     fill="#fff" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:.044493" />
-  <rect x="6.4821" y="8.7588e-5" width="23.15" height="7.4082" ry=".92601"
+  <rect
+    x="6.4821" y="8.7588e-5" width="23.15" height="7.4082" ry=".92601"
     style="fill:#272822;stroke-linecap:round;stroke-linejoin:round;stroke-width:.17363" />
-  <image transform="matrix(.1647 0 0 .1647 6.7811e-7 8.7588e-5)" x="2.3093e-14" y="2.3093e-14"
+  <text
+    x="18.520424" y="3.4544616" class="{{if .Animate }}scroll{{end}}"
+    style="fill:#f8f8f2;font-family:sans-serif;font-size:2.1607px;stroke-linecap:round;stroke-linejoin:round;stroke-width:.79375;text-align:center;text-anchor:middle"
+    xml:space="preserve"><tspan x="18.520424" y="3.4544616" style="fill:#f8f8f2;font-family:sans-serif;font-size:2.1607px;font-weight:bold;stroke-width:.79375">{{ .Title }}</tspan></text>
+  <image
+    transform="matrix(.1647 0 0 .1647 6.7811e-7 8.7588e-5)" x="2.3093e-14" y="2.3093e-14"
     width="44.979" height="44.979" clip-path="url(#clipPath7772)" preserveAspectRatio="none"
-    xlink:href="{{ .Icon | html }}" />
-  <text transform="matrix(.21875 0 0 .21875 -1.1611 -1.5476)" x="89.974625" y="22.86727"
-    clip-path="url(#clipPath8031)"
-    style="fill:#f8f8f2;font-family:sans-serif;font-size:9.8778px;font-style:italic;stroke-linecap:round;stroke-linejoin:round;stroke-width:.79375;text-align:center;text-anchor:middle;font-weight:bold"
-    xml:space="preserve"><tspan x="89.974625" y="22.86727" style="font-family:sans-serif;font-size:9.8778px;font-style:normal;stroke-width:.79375;text-align:center;text-anchor:middle;font-weight:bold">{{ .Title | html }}</tspan></text>
+    xlink:href="{{ .Icon }}" />
   <text x="7.5939951" y="6.8717818"
     style="fill:#f8f8f2;font-family:sans-serif;font-size:1.2347px;font-weight:bold;stroke-linecap:round;stroke-linejoin:round;stroke-width:.17363"
-    xml:space="preserve"><tspan x="7.5939951" y="6.8717818" style="font-family:sans-serif;font-size:1.2347px;font-weight:bold;stroke-width:.17363">{{ .Status | html }}</tspan></text>
-</svg>
+    xml:space="preserve"><tspan x="7.5939951" y="6.8717818" style="font-family:sans-serif;font-size:1.2347px;font-weight:bold;stroke-width:.17363">{{ .Status }}</tspan></text>{{if .Animate }} <style>
+    .scroll {
+    animation: 30s linear -15s infinite alternate scroll;
+    }
+
+    @keyframes scroll {
+    0% {
+    transform: translateX(100%);
+    }
+
+    100% {
+    transform: translateX(-100%);
+    }
+    }
+  </style>
+  {{end}}</svg>
