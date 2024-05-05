@@ -21,8 +21,8 @@
     xlink:href="{{ .Icon | html }}" />
   <text transform="matrix(.21875 0 0 .21875 -1.1611 -1.5476)" x="89.974625" y="22.86727"
     clip-path="url(#clipPath8031)"
-    style="fill:#f8f8f2;font-family:sans-serif;font-size:9.8778px;font-style:italic;stroke-linecap:round;stroke-linejoin:round;stroke-width:.79375;text-align:center;text-anchor:middle"
-    xml:space="preserve"><tspan x="89.974625" y="22.86727" style="font-family:sans-serif;font-size:9.8778px;font-style:normal;stroke-width:.79375;text-align:center;text-anchor:middle">{{ .Title | html }}</tspan></text>
+    style="fill:#f8f8f2;font-family:sans-serif;font-size:9.8778px;font-style:italic;stroke-linecap:round;stroke-linejoin:round;stroke-width:.79375;text-align:center;text-anchor:middle;font-weight:bold"
+    xml:space="preserve"><tspan x="89.974625" y="22.86727" style="font-family:sans-serif;font-size:9.8778px;font-style:normal;stroke-width:.79375;text-align:center;text-anchor:middle;font-weight:bold">{{ .Title | html }}</tspan></text>
   <text x="7.5939951" y="6.8717818"
     style="fill:#f8f8f2;font-family:sans-serif;font-size:1.2347px;font-weight:bold;stroke-linecap:round;stroke-linejoin:round;stroke-width:.17363"
     xml:space="preserve"><tspan x="7.5939951" y="6.8717818" style="font-family:sans-serif;font-size:1.2347px;font-weight:bold;stroke-width:.17363">{{ .Status | html }}</tspan></text>
