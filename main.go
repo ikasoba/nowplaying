@@ -30,6 +30,11 @@ type Playing struct {
 	Status string
 }
 
+type EmbedCode struct {
+	LinkUrl  string
+	ImageUrl string
+}
+
 func ToDataUrl(imgUrl string) (string, error) {
 	resp, err := http.Get(imgUrl)
 	if err != nil {
@@ -83,10 +88,10 @@ func main() {
 			return err
 		}
 
-		return c.Render(http.StatusOK, "embed.html",
-			`<a href="`+link+`">
-  <img src="`+imageUrl+`" />
-</a>`)
+		return c.Render(http.StatusOK, "embed.html", EmbedCode{
+			LinkUrl:  link,
+			ImageUrl: imageUrl,
+		})
 	})
 
 	e.GET("/playing/:user/url", func(c echo.Context) error {
