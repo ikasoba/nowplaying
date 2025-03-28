@@ -6,4 +6,5 @@ services:
     environment:
       LASTFM_KEY: ${LASTFM_KEY}
       LASTFM_SECRET: ${LASTFM_SECRET}
+      IMAGE_SIZE: ${IMAGE_SIZE}
       PORT: :8080

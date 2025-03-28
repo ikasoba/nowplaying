@@ -42,15 +42,24 @@ func ToDataUrl(imgUrl string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	defer resp.Body.Close()
 
-	var buf bytes.Buffer
-	buf.ReadFrom(resp.Body)
+	w := bytes.NewBuffer(make([]byte, 0, 1024))
 
-	return "data:" + resp.Header.Get("Content-Type") + ";base64," + (base64.StdEncoding.EncodeToString(buf.Bytes())), nil
+	w.WriteString("data:" + resp.Header.Get("Content-Type") + ";base64,")
+
+	enc := base64.NewEncoder(base64.StdEncoding, w)
+	defer enc.Close()
+
+	io.Copy(enc, resp.Body)
+
+	return w.String(), nil
 }
 
 func main() {
+	imageSize := os.Getenv("IMAGE_SIZE")
+
 	fm := lastfm.New(os.Getenv("LASTFM_KEY"), os.Getenv("LASTFM_SECRET"))
 	e := echo.New()
 
@@ -121,7 +130,16 @@ func main() {
 
 		track := res.Tracks[0]
 
-		icon, err := ToDataUrl(track.Images[0].Url)
+		url := track.Images[0].Url
+
+		for _, i := range track.Images {
+			if i.Size == imageSize {
+				url = i.Url
+				break
+			}
+		}
+
+		icon, err := ToDataUrl(url)
 		if err != nil {
 			return err
 		}
